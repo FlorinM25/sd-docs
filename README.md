@@ -26,7 +26,7 @@ Pentru a crea o retea virtuala intre doua masini Linux se fac urmatoarele:
 ![alt text](criptografie_simetrica_exemplu.png)
 
 <br />
-Sistemul de operare Kali Linux are preinstalat aplicația GPG pe care o să o utilizăm în continuare pentru a realiza criptarea simetrică.
+**Sistemul de operare Kali Linux are preinstalat aplicația GPG pe care o să o utilizăm în continuare pentru a realiza criptarea simetrică.**
 
 ```
 gpg –-version
