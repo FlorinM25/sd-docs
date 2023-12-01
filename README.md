@@ -145,21 +145,23 @@ gpg --output decrypted_message_gpg.txt --decrypt original_message.txt.gpg
 
 ## Hashing
 
-Sunt 2 fisiere .txt care se modifica putin, iar apoi se afiseaza hash-ul lor
+**Sunt 2 fisiere .txt care se modifica putin, iar apoi se afiseaza hash-ul lor**
 
 ```hexdump 00_fisier_original.txt```
 
 ```hexdump 01_fisier_modificat.txt```
 
 <br />
-Pentru a putea calcula funcția hash MD5 pentru cele fișiere se poate utiliza utilitarul ”md5sum”
+
+**Pentru a putea calcula funcția hash MD5 pentru cele fișiere se poate utiliza utilitarul ```md5sum```**
 
 ```md5sum 00_fisier_original.txt```
 
 ```md5sum 01_fisier_modificat.txt```
 
 <br />
-Se realieaza hashing-ul unor parole foarte slabe si se salveaza in folderul "parole"
+
+**Se realieaza hashing-ul unor parole foarte slabe si se salveaza in folderul ```parole```**
 
 ```echo -n "Password1" | md5sum | tr -d " –" >> parole```
 
@@ -169,21 +171,22 @@ Se realieaza hashing-ul unor parole foarte slabe si se salveaza in folderul "par
 
 <br />
 
-Cu ajutorul ```hashcat``` se vor gasi parolele initiale. Se face reverse la hashing.
+**Cu ajutorul** ```hashcat``` **se vor gasi parolele initiale. Se face reverse la hashing.**
 
 ```hashcat -m 0 parole /usr/share/wordlist/rockyou.txt```
 
 
-La adresa ```/usr/share/wordlist/rockyou.txt``` se afla un wordlist cu foarte multe parole, dar este ```.gz```.
-Ca sa-l descriptati folositi ```sudo gzip -d rockyou.txt.gz```.
+**La adresa** ```/usr/share/wordlist/rockyou.txt``` **se afla un wordlist cu foarte multe parole, dar este** ```.gz```.
+**Ca sa-l descriptati folositi** ```sudo gzip -d rockyou.txt.gz```.
 
 <br />
-După ce execuția aplicației s-a terminat, putem rula următoarea comandă pentru a vedea rezultatele obținute
+
+**După ce execuția aplicației s-a terminat, putem rula următoarea comandă pentru a vedea rezultatele obținute**
 
 ```hashcat -m 0 parole /usr/share/wordlist/rockyou.txt --show```
 
-O altă aplicație asemănătoare cu Hashcat foarte des utilizată pentru recuperarea valorilor inițiale ale datelor hash-uite este aplicația John The Ripper.
-pas reprezintă pregătirea fișierului care conține valorile funcției de hash MD5 aplicate pe diferite parole slabe
+**O altă aplicație asemănătoare cu Hashcat foarte des utilizată pentru recuperarea valorilor inițiale ale datelor hash-uite este aplicația John The Ripper.
+Primul pas reprezintă pregătirea fișierului care conține valorile funcției de hash MD5 aplicate pe diferite parole slabe**
 
 ```echo -n "monitor" | md5sum | tr -d " –" >> passwords```
 
@@ -191,7 +194,7 @@ pas reprezintă pregătirea fișierului care conține valorile funcției de hash
 
 ```echo -n "mydog" | md5sum | tr -d " –" >> passwords```
 
-Pentru a putea rula aplicația John
+**Pentru a putea rula aplicația John**
 
 ```john –format=ALGORITM_HASH –wordlist=WORDLIST FISIER_HASHURI```
 
@@ -206,13 +209,14 @@ Acest proces asigură că comunicarea este privată și sigură, protejând astf
 
 
 ## Certificate digitale
-Primul pas reprezintă generarea certificatului self-signed.
+
+**Primul pas reprezintă generarea certificatului self-signed.**
 
 ```openssl req -x509 -newkey TIPUL_SI_DIMENSIUNEA_CHEII_PRIVATE -keyout CHEIE_PRIVATA -out CERTIFICAT -ALGORITMUL_DE_CRIPTARE -days NR_ZILE_VALABILITATE```
 
 ```openssl req -x509 -newkey rsa:4096 -keyout private_key.pem -out certificate.pem -sha256 -days 365```
 
-Pentru a vedea informațiile despre un certificat:
+**Pentru a vedea informațiile despre un certificat:**
 
 ```openssl x509 certificate.pem -text```
 
