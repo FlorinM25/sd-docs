@@ -38,19 +38,20 @@ Daca, nu e install ```gpg```, se instaleaza cu ```sudo apt-get install gnupg```.
 De asemenea, se poate instala si un GUI pentru ```gpg``` prin care se pot crea chei and stuff. Folositi comanda: ```sudo apt-get install kgpg```
 
 <br />
+
 **Pentru a putea cripta un mesaj folosind gpg putem utiliza următoarea comandă**
 
 forma generala - ```gpg --symmetric --cipher-algo ALGORITM_CRIPTARE MESAJ```
 
 cu algoritmul AES256: ```gpg --symmetric --cipher-algo AES256 original_message.txt```
 
-_În timpul procesului de criptare v-a trebui setată parola de criptare. 
-Aceasta reprezintă cheia criptografică care trebuie folosită de celălalt partener al comunicației pentru a putea decripta mesajul primit._
+**În timpul procesului de criptare v-a trebui setată parola de criptare. 
+Aceasta reprezintă cheia criptografică care trebuie folosită de celălalt partener al comunicației pentru a putea decripta mesajul primit.**
 
-_Pentru a putea obține un fișier criptat care poate fi vizibil într-un text editor, se poate folosi parametrul ”--armor” în apelul comenzii de criptare:_
+**Pentru a putea obține un fișier criptat care poate fi vizibil într-un text editor, se poate folosi parametrul ”--armor” în apelul comenzii de criptare:**
 ```gpg --armor --symmetric --cipher-algo AES256 original_message.txt```
 
-_Pentru a decripta o criptogramă se poate utiliza următoarea comanda din gpg:_
+**Pentru a decripta o criptogramă se poate utiliza următoarea comanda din gpg:**
 ```gpg --output DECRYPTED_MESSAGE --decrypt ENCRYPTED_MESSAGE```
 
 ```
@@ -72,7 +73,8 @@ gpg --output decrypted_message_gpg.txt --decrypt original_message.txt.gpg
 
 <br />
 <br />
-Sistemul de operare Kali Linux are preinstalat aplicația OpenSSL pe care putem să o utilizăm de asemenea pentru a realiza criptarea simetrică a unui mesaj.
+
+**Sistemul de operare Kali Linux are preinstalat aplicația OpenSSL pe care putem să o utilizăm de asemenea pentru a realiza criptarea simetrică a unui mesaj.**
 
 ```openssl --help```
 
@@ -80,14 +82,14 @@ Sistemul de operare Kali Linux are preinstalat aplicația OpenSSL pe care putem 
 
 ```man openssl```
 
-Forma generala de comanda pentru criptare cu ```openssl```:
+**Forma generala de comanda pentru criptare cu** ```openssl```:
 
 ```openssl ALGORITM_CRIPTARE -e -in MESAJ_ORIGINAL -out MESAJ_CRIPTAT```
 
 ```openssl aes-256-cbc -e -in original_message.txt -out encrypted_message.txt```
 
 
-Secventa de comenzi:
+**Secventa de comenzi:**
 
 ```ls -l```
 
@@ -101,37 +103,38 @@ Secventa de comenzi:
 ![img.png](criptografie_asimetrica.png)
 ![img.png](criptografie_asimetrica_exemplu.png)
 
-Deoarece criptografie asimetrică are la bază utilizarea unor perechi de chei, primul pas în realizarea acesteia este generarea perechilor de chei necesare.
+**Deoarece criptografie asimetrică are la bază utilizarea unor perechi de chei, primul pas în realizarea acesteia este generarea perechilor de chei necesare.**
 
 ```openssl genrsa -out PRIVATE_KEY KEY_SIZE```
 
 ```openssl genrsa -out private_key_bob.pem 2048```
 
-Următorul pas după generarea cheii private este reprezentat de generarea cheii publice
+**Următorul pas după generarea cheii private este reprezentat de generarea cheii publice**
 
 ```openssl rsa -in PRIVATE_KEY -pubout -out PUBLIC_KEY```
 
 ```openssl rsa -in private_key_bob.pem -pubout -out public_key_bob.pem```
 
-Pentru a putea vedea informații despre cheia privată generată anterior se poate utiliza comanda următoare:
+**Pentru a putea vedea informații despre cheia privată generată anterior se poate utiliza comanda următoare:**
 
 ```openssl rsa -in private_key_bob.pem -text -noout```
 
 
-Următorul pas este reprezentat de criptarea mesajului folosind cheia publică a lui Alice. Comanda pentru a cripta un fișier este următoarea:
+**Următorul pas este reprezentat de criptarea mesajului folosind cheia publică a lui Alice. Comanda pentru a cripta un fișier este următoarea:**
 
 ```openssl pkeyutl -encrypt -in MESAJ_ORIGINAL -out MESAJ_CRIPTAT -inkey CHEIE_PUBLICĂ -pubin```
 
 ```openssl pkeyutl -encrypt -in mesaj.txt -out mesaj_criptat_alice.txt -inkey cheie_publica_alice.pem -pubin```
 
-După ce criptograma a ajuns la Alice, următorul pas este ca Alice să decripteze mesajul criptat primit de la Bob:
+**După ce criptograma a ajuns la Alice, următorul pas este ca Alice să decripteze mesajul criptat primit de la Bob:**
 
 ```openssl pkeyutl -decrypt -in MESAJ_CRIPTAT -inkey CHEIE_PRIVATĂ -out MESAJ_DECRIPTAT```
 
 ```openssl pkeyutl -decrypt -in mesaj_criptat_alice.txt -inkey private_key_alice.pem -out mesaj_decriptat_de_la_bob.txt```
 
 <br />
-Se poate întâmpla ca mesajele transmise între cei doi participanți ai comunicației să fie interceptate dacă comunicația dintre aceștia se realizează printr-un canal nesecurizat:
+
+**Se poate întâmpla ca mesajele transmise între cei doi participanți ai comunicației să fie interceptate dacă comunicația dintre aceștia se realizează printr-un canal nesecurizat:**
 
 ```openssl pkeyutl -decrypt -in mesaj_criptat_bob.txt -inkey private_key_mallory.pem -out decrypted.txt```
 
