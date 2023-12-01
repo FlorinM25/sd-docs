@@ -1,7 +1,7 @@
 # SD-DOCS
  _**Commands for Data Security lab.**_
 
-## Laboratorul 1
+% Laboratorul 1
 Se vor verifica următoarele „primitive” pe baza cărora vor avea loc laboratoarele de securitate. 
 În terminal, se vor rula următoarele comenzi și se va urmări rezultatul lor:
 ```
