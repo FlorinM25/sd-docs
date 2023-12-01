@@ -12,11 +12,6 @@ traceroute www.example.com
 theharvester -d example.com -l 100 google
 ```
 
-Pentru a crea o retea virtuala intre doua masini Linux se fac urmatoarele:
-```
-
-```
-
 
 # Laboratorul 2
 **_Criptografie, Hashing, SSL/TLS Handshake și Certificate Digitale_**
