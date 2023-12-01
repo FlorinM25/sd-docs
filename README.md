@@ -38,19 +38,19 @@ Daca, nu e install ```gpg```, se instaleaza cu ```sudo apt-get install gnupg```.
 De asemenea, se poate instala si un GUI pentru ```gpg``` prin care se pot crea chei and stuff. Folositi comanda: ```sudo apt-get install kgpg```
 
 <br />
-Pentru a putea cripta un mesaj folosind gpg putem utiliza următoarea comandă
+**Pentru a putea cripta un mesaj folosind gpg putem utiliza următoarea comandă**
 
 forma generala - ```gpg --symmetric --cipher-algo ALGORITM_CRIPTARE MESAJ```
 
 cu algoritmul AES256: ```gpg --symmetric --cipher-algo AES256 original_message.txt```
 
-În timpul procesului de criptare v-a trebui setată parola de criptare. 
-Aceasta reprezintă cheia criptografică care trebuie folosită de celălalt partener al comunicației pentru a putea decripta mesajul primit.
+_În timpul procesului de criptare v-a trebui setată parola de criptare. 
+Aceasta reprezintă cheia criptografică care trebuie folosită de celălalt partener al comunicației pentru a putea decripta mesajul primit._
 
-Pentru a putea obține un fișier criptat care poate fi vizibil într-un text editor, se poate folosi parametrul ”--armor” în apelul comenzii de criptare:
+_Pentru a putea obține un fișier criptat care poate fi vizibil într-un text editor, se poate folosi parametrul ”--armor” în apelul comenzii de criptare:_
 ```gpg --armor --symmetric --cipher-algo AES256 original_message.txt```
 
-Pentru a decripta o criptogramă se poate utiliza următoarea comanda din gpg:
+_Pentru a decripta o criptogramă se poate utiliza următoarea comanda din gpg:_
 ```gpg --output DECRYPTED_MESSAGE --decrypt ENCRYPTED_MESSAGE```
 
 ```
